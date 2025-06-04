@@ -12,17 +12,17 @@ const ServicesSection = () => {
             Complete electric lawn care solutions with zero emissions and maximum precision
           </p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
           {services.map((service, index) => (
             <Card key={index} className="hover:shadow-lg transition-shadow duration-300 border-green-100">
               <CardHeader className="text-center">
                 <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
                   <service.icon className="h-8 w-8 text-green-600" />
                 </div>
-                <CardTitle className="text-green-800">{service.title}</CardTitle>
+                <CardTitle className="text-green-800 text-sm lg:text-base">{service.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-center text-gray-600">
+                <CardDescription className="text-center text-gray-600 text-sm">
                   {service.description}
                 </CardDescription>
               </CardContent>

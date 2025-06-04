@@ -1,25 +1,30 @@
 
-import { Scissors, Zap, Leaf, Shield } from "lucide-react";
+import { Scissors, Zap, Leaf, Shield, Gutter } from "lucide-react";
 
 export const services = [
   {
     icon: Scissors,
-    title: "Electric Mowing",
-    description: "Quiet, powerful 100% electric mowing with zero emissions for a perfectly manicured lawn."
+    title: "Weekly Lawn Maintenance",
+    description: "Regular electric mowing and trimming services to keep your lawn perfectly maintained year-round."
   },
   {
-    icon: Zap,
-    title: "Electric Trimming",
-    description: "Precision electric trimming and edging with no gas, no fumes - just clean, precise cuts."
+    icon: Shrub,
+    title: "Hedge & Shrub Pruning",
+    description: "Professional electric pruning to shape and maintain your hedges and shrubs for optimal growth."
   },
   {
     icon: Leaf,
-    title: "Eco-Friendly Landscaping",
-    description: "Complete electric landscape maintenance to enhance your property while protecting the environment."
+    title: "Leaf & Debris Cleanup",
+    description: "Efficient electric cleanup services to remove leaves and debris, keeping your property pristine."
   },
   {
-    icon: Shield,
-    title: "Zero Emission Service",
-    description: "100% electric equipment means no harmful emissions, noise pollution, or gas fumes."
+    icon: Gutter,
+    title: "Gutter Cleaning",
+    description: "Thorough gutter cleaning and maintenance to protect your property from water damage."
+  },
+  {
+    icon: TreeDeciduous,
+    title: "Mulch Bed Maintenance",
+    description: "Complete mulch bed care including weeding, edging, and fresh mulch application for healthy landscapes."
   }
 ];
