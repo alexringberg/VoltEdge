@@ -1,6 +1,20 @@
 import { Button } from "@/components/ui/button";
 
 const Header = () => {
+  const handleSmoothScroll = (targetId: string) => {
+    const targetSection = document.getElementById(targetId);
+    if (targetSection) {
+      targetSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
+  const handleGetQuoteClick = () => {
+    handleSmoothScroll('contact');
+  };
+
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -16,10 +30,30 @@ const Header = () => {
           </div>
         </div>
         <div className="hidden md:flex items-center space-x-6">
-          <a href="#services" className="text-green-700 hover:text-green-900 transition-colors">Services</a>
-          <a href="#about" className="text-green-700 hover:text-green-900 transition-colors">About</a>
-          <a href="#contact" className="text-green-700 hover:text-green-900 transition-colors">Contact</a>
-          <Button className="bg-green-600 hover:bg-green-700">Get Quote</Button>
+          <button 
+            onClick={() => handleSmoothScroll('services')}
+            className="text-green-700 hover:text-green-900 transition-colors"
+          >
+            Services
+          </button>
+          <button 
+            onClick={() => handleSmoothScroll('about')}
+            className="text-green-700 hover:text-green-900 transition-colors"
+          >
+            About
+          </button>
+          <button 
+            onClick={() => handleSmoothScroll('contact')}
+            className="text-green-700 hover:text-green-900 transition-colors"
+          >
+            Contact
+          </button>
+          <Button 
+            onClick={handleGetQuoteClick}
+            className="bg-green-600 hover:bg-green-700"
+          >
+            Get Quote
+          </Button>
         </div>
       </div>
     </header>
