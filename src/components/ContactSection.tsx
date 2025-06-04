@@ -4,24 +4,33 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useState } from 'react'
-import { useToast } from '@/hooks/use-toast'
 
 const ContactSection = () => {
-  const { toast } = useToast()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     message: '',
   })
+  const [showToast, setShowToast] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    toast({
-      title: 'Quote Request Sent!',
-      description: "We'll get back to you within 24 hours with a free estimate.",
-    })
+
+    // Close the keyboard by blurring any active input
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur()
+    }
+
+    // Clear form data
     setFormData({ name: '', email: '', phone: '', message: '' })
+
+    // Show bottom toast
+    setTimeout(() => {
+      setShowToast(true)
+      // Hide toast after 5 seconds
+      setTimeout(() => setShowToast(false), 5000)
+    }, 300)
   }
 
   return (
@@ -79,37 +88,44 @@ const ContactSection = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className='space-y-4'>
+              <form onSubmit={handleSubmit} className='space-y-4' autoComplete='on'>
                 <div>
                   <Input
+                    name='name'
                     placeholder='Your Name'
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
                     required
+                    autoComplete='name'
                     className='border-green-200 focus:border-green-500'
                   />
                 </div>
                 <div>
                   <Input
+                    name='email'
                     type='email'
                     placeholder='Email Address'
                     value={formData.email}
                     onChange={e => setFormData({ ...formData, email: e.target.value })}
                     required
+                    autoComplete='email'
                     className='border-green-200 focus:border-green-500'
                   />
                 </div>
                 <div>
                   <Input
+                    name='phone'
                     type='tel'
                     placeholder='Phone Number'
                     value={formData.phone}
                     onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                    autoComplete='tel'
                     className='border-green-200 focus:border-green-500'
                   />
                 </div>
                 <div>
                   <Textarea
+                    name='message'
                     placeholder='Tell us about your lawn care needs...'
                     value={formData.message}
                     onChange={e => setFormData({ ...formData, message: e.target.value })}
@@ -123,6 +139,25 @@ const ContactSection = () => {
               </form>
             </CardContent>
           </Card>
+        </div>
+      </div>
+
+      {/* Bottom Toast */}
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-50 transform transition-transform duration-300 ${
+          showToast ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      >
+        <div className='bg-blue-400 text-blue-900 p-4 mx-4 mb-4 rounded-lg shadow-lg'>
+          <div className='flex items-center justify-between'>
+            <div>
+              <h4 className='font-semibold'>Quote Request Sent!</h4>
+              <p className='text-sm'>We'll get back to you within 24 hours with a free estimate.</p>
+            </div>
+            <button onClick={() => setShowToast(false)} className='text-white hover:text-green-200 ml-4'>
+              ✕
+            </button>
+          </div>
         </div>
       </div>
     </section>

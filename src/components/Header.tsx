@@ -1,6 +1,10 @@
 import { Button } from '@/components/ui/button'
+import { Menu, X } from 'lucide-react'
+import { useState } from 'react'
 
 const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
   const handleSmoothScroll = (targetId: string) => {
     const targetSection = document.getElementById(targetId)
     if (targetSection) {
@@ -9,6 +13,7 @@ const Header = () => {
         block: 'start',
       })
     }
+    setIsMobileMenuOpen(false) // Close mobile menu after clicking
   }
 
   const handleGetQuoteClick = () => {
@@ -29,6 +34,8 @@ const Header = () => {
             <p className='text-sm text-green-600'>100% Electric • Zero Emissions</p>
           </div>
         </div>
+
+        {/* Desktop Navigation */}
         <div className='hidden md:flex items-center space-x-6'>
           <button
             onClick={() => handleSmoothScroll('services')}
@@ -52,7 +59,49 @@ const Header = () => {
             Get Quote
           </Button>
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className='md:hidden p-2'
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label='Toggle mobile menu'
+        >
+          {isMobileMenuOpen ? (
+            <X className='h-6 w-6 text-green-700' />
+          ) : (
+            <Menu className='h-6 w-6 text-green-700' />
+          )}
+        </button>
       </div>
+
+      {/* Mobile Navigation */}
+      {isMobileMenuOpen && (
+        <div className='md:hidden bg-white border-t border-green-100'>
+          <div className='container mx-auto px-4 py-4 space-y-4'>
+            <button
+              onClick={() => handleSmoothScroll('services')}
+              className='block w-full text-left text-green-700 hover:text-green-900 transition-colors py-2'
+            >
+              Services
+            </button>
+            <button
+              onClick={() => handleSmoothScroll('about')}
+              className='block w-full text-left text-green-700 hover:text-green-900 transition-colors py-2'
+            >
+              About
+            </button>
+            <button
+              onClick={() => handleSmoothScroll('contact')}
+              className='block w-full text-left text-green-700 hover:text-green-900 transition-colors py-2'
+            >
+              Contact
+            </button>
+            <Button onClick={handleGetQuoteClick} className='w-full bg-green-600 hover:bg-green-700 mt-4'>
+              Get Quote
+            </Button>
+          </div>
+        </div>
+      )}
     </header>
   )
 }
